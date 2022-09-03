@@ -1,0 +1,8 @@
+{
+    "name": "starrise-framework/natanael",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
