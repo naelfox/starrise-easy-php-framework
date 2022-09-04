@@ -1,5 +1,5 @@
 # starrise-framework
-php mvc framework with object oriented concepts
+php mvc framework with POO
 
 # model
 
