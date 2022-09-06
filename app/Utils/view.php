@@ -33,11 +33,11 @@ class View
         $contentView = self::getContentView($view);
         $keys = array_keys($vars);
 
-       
-    
+
+
 
         $keys = array_map(function ($item) {
-            return '{{' . $item . '}}';
+            return '|| ' . $item . ' ||';
         }, $keys);
         return str_replace($keys, array_values($vars), $contentView);
     }
