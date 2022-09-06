@@ -24,8 +24,17 @@ class View
         return file_exists($file) ? file_get_contents($file) : $err;
     }
 
-    //método responsável por retornar um conteúdo renderizado de uma view
 
+    /**
+     * 
+     * This method render the view
+     *
+     * @access public
+     * @param (string)$directory - file name
+     * @param (array)$data -data pass in param
+     * @return (?) html content
+     * @version 1
+     **/
     public static function render($view, $vars = [])
     {
         //self chama um método da classe atual que é estático caso não for usar o $this
