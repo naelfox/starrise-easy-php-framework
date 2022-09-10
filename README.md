@@ -1,5 +1,6 @@
 # starrise-framework
 php mvc framework with POO
+3 pillars of a good project well done are quality, performance and maintainability.
 
 ## template system
 
