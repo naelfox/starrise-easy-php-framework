@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http;
 class Response
 {
@@ -36,9 +35,8 @@ class Response
     public function __construct($httpCode, $content, $contentType = 'text/html')
     {
         $this->$httpCode = $httpCode;
-        $this->$content = $content;
+        $this->$content  = $content;      
         $this->setContentType($contentType);
-
     }
     /**
      * Methods that will be change content type of response
@@ -75,6 +73,5 @@ class Response
                 exit;
         }
 
-        
     }
 }
