@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Http;
 
 class Response
 {
     /**
      *Code Status Http
-     *@var interger
+     *@var integer
      */
     private $httpCode = 200;
 
@@ -36,7 +37,7 @@ class Response
     public function __construct($httpCode, $content, $contentType = 'text/html')
     {
         $this->httpCode = $httpCode;
-        $this->content  = $content;      
+        $this->content  = $content;
         $this->setContentType($contentType);
     }
     /**
@@ -61,12 +62,27 @@ class Response
         $this->headers[$key] = $value;
     }
 
+    /**
+     * Methods will be send headers to browser
+     */
+
+    private function sendHeaders()
+    {
+        //Status
+        http_response_code($this->httpCode);
+
+        //Send Header
+        foreach ($this->headers as $key => $value) {
+            header($key . ': ' . $value);
+        }
+    }
 
     /**
      * Methods that will be send response to user
      */
     public function sendResponse()
     {
+        $this->sendHeaders();
         switch ($this->contentType) {
             case 'text/html':
                 echo $this->content;
