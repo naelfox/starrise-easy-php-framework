@@ -1,5 +1,6 @@
 <?php
 namespace App\Http;
+
 class Response
 {
     /**
@@ -34,8 +35,8 @@ class Response
      */
     public function __construct($httpCode, $content, $contentType = 'text/html')
     {
-        $this->$httpCode = $httpCode;
-        $this->$content  = $content;      
+        $this->httpCode = $httpCode;
+        $this->content  = $content;      
         $this->setContentType($contentType);
     }
     /**
@@ -66,12 +67,10 @@ class Response
      */
     public function sendResponse()
     {
-
         switch ($this->contentType) {
             case 'text/html':
                 echo $this->content;
                 exit;
         }
-
     }
 }
