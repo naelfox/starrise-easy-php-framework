@@ -90,7 +90,6 @@ class Router
         //uri of the request
         $uri = $this->request->getUri();
 
-
         //split the URI with Prefix
         $xUri = strlen($this->prefix) ? explode($this->prefix, $uri) : [$uri];
 
@@ -106,17 +105,40 @@ class Router
     private function getRoute()
     {
         $uri = $this->getUri();
+        $httpMethod = $this->request->getHttpMethod();
+
+
+        // validate route
+        foreach ($this->routes as  $patternRoute => $methods) {
+            //check if route is equal with pattern
+            if (preg_match($patternRoute, $uri)) {
+                //verifica o método
+                if ($methods[$httpMethod]) {
+                    //return of param of the route
+                    return $methods[$httpMethod];
+                }
+
+                throw new Exception("Method not allowed", 405);
+                
+            }
+        }
+        // URL not found
+        throw new Exception("URL not found", 404);
+        
     }
 
     /**
      * method responsible for run a current route
      */
-
     public function run()
     {
         try {
             // get current route 
             $route = $this->getRoute();
+            echo '<pre>';
+            print_r($route);
+            echo '</pre>';
+            exit;
         } catch (Exception $e) {
             return new Response($e->getCode(), $e->getMessage());
         }
@@ -130,7 +152,7 @@ class Router
 
     public function get($route, $params = [])
     {
-
         return $this->addRoute('GET', $route, $params);
     }
+ 
 }
