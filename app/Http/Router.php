@@ -4,6 +4,7 @@ namespace App\Http;
 
 use \Closure;
 use \Exception;
+use \ReflectionFunction;
 
 class Router
 {
@@ -66,10 +67,21 @@ class Router
 
         //validate params
         foreach ($params as $key => $value) {
-            $params['controller'] = $value;
-            unset($params[$key]);
-            continue;
+            if ($value instanceof Closure) {
+                $params['controller'] = $value;
+                unset($params[$key]);
+                continue;
+            }
         }
+
+        //route variable
+        $params['variables'] = [];
+        $patternVariable = '/{(.*?)}/';
+        if(preg_match_all($patternVariable, $route, $matches)){
+            $route = preg_replace($patternVariable, '(.*?)', $route);
+            $params['variable'] = $matches[1];
+        }
+
 
         // pattern of validação da url
         $patternRoute = '/^' . str_replace('/', '\/', $route) . '$/';
@@ -78,6 +90,10 @@ class Router
 
         $this->routes[$patternRoute][$method] = $params;
     }
+
+
+
+
 
     /**
      * Method responsible for returning the URI disreguarding the prefix
@@ -111,20 +127,23 @@ class Router
         // validate route
         foreach ($this->routes as  $patternRoute => $methods) {
             //check if route is equal with pattern
-            if (preg_match($patternRoute, $uri)) {
+            if (preg_match($patternRoute, $uri, $matches)) {
                 //verifica o método
-                if ($methods[$httpMethod]) {
+                if (isset($methods[$httpMethod])) {
                     //return of param of the route
+                    unset($matches[0]);
+                    //keys
+                    $keys = $methods[$httpMethod]['variables'];
+                    $methods[$httpMethod]['variables'] = array_combine($keys, $matches);
+                    $methods[$httpMethod]['variables']['request'] = $this->request;
                     return $methods[$httpMethod];
                 }
 
                 throw new Exception("Method not allowed", 405);
-                
             }
         }
         // URL not found
         throw new Exception("URL not found", 404);
-        
     }
 
     /**
@@ -135,12 +154,17 @@ class Router
         try {
             // get current route 
             $route = $this->getRoute();
-          
+
             //check controller
 
-            if(!isset($route['controller'])){
+            if (!isset($route['controller'])) {
                 throw new Exception("The url cannot be processed", 500);
-                
+            }
+
+            $reflection = new ReflectionFunction($route['controller']);
+            foreach ($reflection->getParameters() as $parameter) {
+                $name = $parameter->getName();
+                $args[$name] = $route['variables'][$name] ?? ''; 
             }
 
             // function argument
@@ -148,8 +172,6 @@ class Router
             $args = [];
             //return the run of function
             return call_user_func_array($route['controller'],  $args);
-
-
         } catch (Exception $e) {
             return new Response($e->getCode(), $e->getMessage());
         }
@@ -177,5 +199,4 @@ class Router
     {
         return $this->addRoute('DELETE', $route, $params);
     }
- 
 }

@@ -4,14 +4,12 @@ require_once "../vendor/autoload.php";
 
 use \App\Http\Router;
 use \App\Utils\View;
+use \App\Utils\Url;
 
-echo '<pre>';
-print_r($_SERVER);
-echo '</pre>';
+$url = new Url();
 
-die;
 
-define('URL', 'http://localhost:8081');
+define('URL', $url->getUrl());
 
 
 View::init([

@@ -13,7 +13,13 @@ $obRouter->get('/', [
 
 $obRouter->get('/about', [
     function () {
-        return new Response(200, About::getHome());
+        return new Response(200, About::getAbout());
+    }
+]
+);
+$obRouter->get('/pagina/{idPage}/{action}', [
+    function ($idPage, $action) {
+        return new Response(200, 'Página ' .$idPage . ' - ' . $action);
     }
 ]
 );
