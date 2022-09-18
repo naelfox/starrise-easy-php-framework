@@ -135,10 +135,21 @@ class Router
         try {
             // get current route 
             $route = $this->getRoute();
-            echo '<pre>';
-            print_r($route);
-            echo '</pre>';
-            exit;
+          
+            //check controller
+
+            if(!isset($route['controller'])){
+                throw new Exception("The url cannot be processed", 500);
+                
+            }
+
+            // function argument
+
+            $args = [];
+            //return the run of function
+            return call_user_func_array($route['controller'],  $args);
+
+
         } catch (Exception $e) {
             return new Response($e->getCode(), $e->getMessage());
         }
@@ -153,6 +164,18 @@ class Router
     public function get($route, $params = [])
     {
         return $this->addRoute('GET', $route, $params);
+    }
+    public function post($route, $params = [])
+    {
+        return $this->addRoute('POST', $route, $params);
+    }
+    public function put($route, $params = [])
+    {
+        return $this->addRoute('PUT', $route, $params);
+    }
+    public function delete($route, $params = [])
+    {
+        return $this->addRoute('DELETE', $route, $params);
     }
  
 }

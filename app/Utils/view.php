@@ -5,6 +5,20 @@ namespace App\Utils;
 
 class View
 {
+    /**
+     * pattern variable
+     *
+     * @var array
+     */
+    private static $vars = [];
+    /**
+     * Methods that define initials data of the class 
+     */
+
+    public static function init($vars = [])
+    {
+        self::$vars = $vars;
+    }
 
 
 
@@ -40,13 +54,17 @@ class View
         //self chama um método da classe atual que é estático caso não for usar o $this
 
         $contentView = self::getContentView($view);
+
+
+        //merge of variables
+        $vars = array_merge(self::$vars, $vars);
+
+
         $keys = array_keys($vars);
 
 
-
-
         $keys = array_map(function ($item) {
-            return '|| ' . $item . ' ||';
+            return '{{' . $item . '}}';
         }, $keys);
         return str_replace($keys, array_values($vars), $contentView);
     }

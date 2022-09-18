@@ -1,0 +1,6 @@
+# on the rewrite
+RewriteEngine on
+
+# send all in index
+RewriteCond %(REQUEST_FILE) ! - f
+RewriteRule ^(.*)$ ./index.php [QSA,NC]

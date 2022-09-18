@@ -3,19 +3,26 @@
 require_once "../vendor/autoload.php";
 
 use \App\Http\Router;
-use \App\Http\Response;
-use \App\Controllers\Home;
+use \App\Utils\View;
 
-define('URL', 'http://localhost/mcv');
+echo '<pre>';
+print_r($_SERVER);
+echo '</pre>';
+
+die;
+
+define('URL', 'http://localhost:8081');
+
+
+View::init([
+    'URL' => URL
+]);
 
 $obRouter = new Router(URL);
 
-$obRouter->get('/', [
-        function () {
-            return new Response(200, Home::getHome());
-        }
-    ]
-);
+//include  routes
+
+include '../app/routes/pages.php';
 
 
 $obRouter->run()->sendResponse();
