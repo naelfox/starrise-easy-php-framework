@@ -19,7 +19,7 @@ $obRouter->get('/about', [
 );
 $obRouter->get('/pagina/{idPage}/{action}', [
     function ($idPage, $action) {
-        return new Response(200, 'Página ' .$idPage . ' - ' . $action);
+        return new Response(200, 'Página ' . $idPage . ' - ' . $action);
     }
 ]
 );

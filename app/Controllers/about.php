@@ -23,6 +23,6 @@ class About extends Page
         ]);
 
         // return page view
-        return self::getPage('Início', $content);
+        return self::getPage('About', $content);
     }
 }
