@@ -77,9 +77,9 @@ class Router
         //route variable
         $params['variables'] = [];
         $patternVariable = '/{(.*?)}/';
-        if(preg_match_all($patternVariable, $route, $matches)){
+        if (preg_match_all($patternVariable, $route, $matches)) {
             $route = preg_replace($patternVariable, '(.*?)', $route);
-            $params['variable'] = $matches[1];
+            $params['variables'] = $matches[1];
         }
 
 
@@ -161,15 +161,16 @@ class Router
                 throw new Exception("The url cannot be processed", 500);
             }
 
-            $reflection = new ReflectionFunction($route['controller']);
-            foreach ($reflection->getParameters() as $parameter) {
-                $name = $parameter->getName();
-                $args[$name] = $route['variables'][$name] ?? ''; 
-            }
-
             // function argument
 
             $args = [];
+
+            $reflection = new ReflectionFunction($route['controller']);
+            foreach ($reflection->getParameters() as $parameter) {
+                $name = $parameter->getName();
+                $args[$name] = $route['variables'][$name] ?? '';
+            }
+
             //return the run of function
             return call_user_func_array($route['controller'],  $args);
         } catch (Exception $e) {
