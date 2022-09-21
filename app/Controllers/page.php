@@ -8,12 +8,12 @@ use \App\Utils\View;
 class Page
 {
     
-    // metodo responsável por renderizar o topo da página
+    //render the header
     private static function getHeader()
     {
         return View::render('templates/header');
     }
-    // metodo responsável por renderizar o rodapé da página
+    // render the footer
     private static function getFooter()
     {
         return View::render('templates/footer', 
@@ -24,7 +24,11 @@ class Page
     );
     }
 
-    // metodos responsável por retornar o conteúdo (view) da nossa página generica
+    // method return the page view
+    /**
+     * @param string $title
+     * @param string $content
+     */
 
     public static function getPage($title, $content)
     {

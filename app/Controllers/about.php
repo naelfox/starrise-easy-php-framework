@@ -18,7 +18,7 @@ class About extends Page
         // return view home
         $content = View::render('layouts/about', [
             'name' => 'Sobre a organização',
-            'description' =>  'Esta estrutura é feita para todos. É uma estrutura amigável, leve e intuitiva para todos os seus projetos, desde os mais avançados até os menos complexos. Ela vem com tudo o que você precisa para começar a trabalhar imediatamente: Estrutura MVC, validação de dados e manuseio de formulários, ajudantes de sistema de arquivos, suporte AJAX, cache flexível e muito mais.  Ele ajuda a construir aplicações poderosas com modelos de domínio ricos, e código limpo e de fácil manutenção.',
+            'description' =>  'This structure is made for everyone. It is a user-friendly, lightweight and intuitive framework for all your projects, from the most advanced to the least complex. It comes with everything you need to get up and running right away: MVC framework, data validation and form handling, file system helpers, AJAX support, flexible caching and much more. It helps you build powerful applications with rich domain models and clean, maintainable code.',
             'site' =>  $obOrganization->site
         ]);
 

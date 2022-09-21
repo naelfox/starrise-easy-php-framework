@@ -22,7 +22,7 @@ class View
 
 
 
-    //método responsável por retornar um conteúdo de uma view
+    
     private static function getContentView($view, $debug = false)
     {
         $file = __DIR__ . '/../../resources/views/' . $view . '.phtml';
@@ -51,18 +51,11 @@ class View
      **/
     public static function render($view, $vars = [])
     {
-        //self chama um método da classe atual que é estático caso não for usar o $this
-
         $contentView = self::getContentView($view);
-
 
         //merge of variables
         $vars = array_merge(self::$vars, $vars);
-
-
         $keys = array_keys($vars);
-
-
         $keys = array_map(function ($item) {
             return '{{' . $item . '}}';
         }, $keys);

@@ -9,13 +9,13 @@ use \App\Models\Organization;
 class Home extends Page
 {
 
-    // metodos responsável por retornar o conteúdo (view) da nossa home
+  
 
     public static function getHome()
     {
         $obOrganization = new Organization;
 
-        // retorna a view da home 
+        // Return view of home
         $content = View::render('layouts/home', [
             'name' => $obOrganization->name,
             'description' =>  $obOrganization->description,
