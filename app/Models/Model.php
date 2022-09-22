@@ -76,10 +76,6 @@ class Model
         return $this->db->lastInsertId();
     }
 
-
-
-
-
     /**
      * Consulta direcionada a tabela atual
      *
