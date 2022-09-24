@@ -22,20 +22,18 @@ class View
 
 
 
-    
+
     private static function getContentView($view, $debug = false)
     {
-        $file = __DIR__ . '/../../resources/views/' . $view . '.phtml';
+        $view .= '.phtml';
 
-        $err = '';
+        $path = __DIR__ . '/../../resources/views/' . $view;
+
+        $error = 'Don\'t have this page';
         if ($debug) {
-            $err = 'Não possui essa página: ' . $file;
-        } else {
-            $err = 'Não possui essa página';
+            $error .= " -> {$view} <-";
         }
-
-
-        return file_exists($file) ? file_get_contents($file) : $err;
+        return file_exists($path) ? file_get_contents($path) : $error;
     }
 
 

@@ -1,28 +1,25 @@
 <?php
-// definir o namespace
+
 
 namespace App\Controllers;
 
-use \App\Utils\View;
-use \App\Models\Organization;
+use App\Utils\View;
+use App\Models\Book;
 
 class Home extends Page
 {
-
-  
-
     public static function getHome()
     {
-        $obOrganization = new Organization;
+        $obBook = new Book;
 
-        // Return view of home
+        // return home view
         $content = View::render('layouts/home', [
-            'name' => $obOrganization->name,
-            'description' =>  $obOrganization->description,
-            'site' =>  $obOrganization->site
+            'name' => $obBook->name,
+            'description' =>  $obBook->description,
+            'site' =>  $obBook->site
         ]);
 
-        // retorna a view da página 
-        return self::getPage('Início', $content);
+        // return page view
+        return self::getPage('Home', $content);
     }
 }

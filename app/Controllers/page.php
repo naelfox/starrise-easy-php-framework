@@ -1,9 +1,9 @@
 <?php
-// definir o namespace
+
 
 namespace App\Controllers;
 
-use \App\Utils\View;
+use App\Utils\View;
 
 class Page
 {

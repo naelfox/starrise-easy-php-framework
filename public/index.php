@@ -10,8 +10,8 @@ use \App\Utils\Environment;
 Environment::load();
 
 
-echo getenv('DB_CONNECTION');
-die;
+// echo getenv('DB_CONNECTION');
+// die;
 
 $url = new Url();
 
