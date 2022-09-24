@@ -10,13 +10,13 @@ class Home extends Page
 {
     public static function getHome()
     {
-        $obBook = new Book;
+        $objBook = new Book;
 
         // return home view
         $content = View::render('layouts/home', [
-            'name' => $obBook->name,
-            'description' =>  $obBook->description,
-            'site' =>  $obBook->site
+            'name' => $objBook->name,
+            'description' =>  $objBook->description,
+            'site' =>  $objBook->site
         ]);
 
         // return page view
