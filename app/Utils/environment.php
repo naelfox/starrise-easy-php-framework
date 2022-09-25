@@ -12,15 +12,19 @@ class Environment
      */
     public static function load()
     {
-        if (!file_exists(self::$directoryEnv)) {
-            return false;
+        if (file_exists(self::$directoryEnv)) {
+            self::insertVariables(file(self::$directoryEnv));
+            return true;
         }
+        return false;
+    }
 
-        $lines = file(self::$directoryEnv);
+    public static function insertVariables($lines)
+    {
         foreach ($lines as $line) {
-            $clearLine = trim($line);
-            if (!empty($clearLine)) {
-                putenv(trim($clearLine));
+            $cleanLine = trim($line);
+            if (!empty($cleanLine)) {
+                putenv(trim($cleanLine));
             }
         }
     }
