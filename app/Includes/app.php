@@ -1,19 +1,17 @@
-<?
+<?php
 
-require_once "../../vendor/autoload.php";
+use \App\Utils\View;
+use \App\Utils\Url;
+use \App\Utils\Environment;
 
-use App\Utils\View;
-use App\Utils\Url;
-use App\Utils\Environment;
-
+// Load environment variables
 Environment::load();
 
 // echo getenv('DB_CONNECTION');
 // die;
 
-$url = new Url();
 
-define('URL', $url->getUrl());
+define('URL', (new Url())->getUrl());
 
 View::init([
     'URL' => URL
