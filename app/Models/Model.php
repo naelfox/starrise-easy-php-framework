@@ -24,7 +24,7 @@ class Model
      *
      * @name insert
      * @access public
-     * @param (array)$dados - Array com os dados para inserir na tabela
+     * @param (array)$dados - Array com os dados para inserir na table
      * @param (boolean)$where - Condição passada para atualização
      * @return (int) retorna a id da linha inserida;
      * @version 1.0
@@ -43,12 +43,12 @@ class Model
         //FAZ O DEBUG DA STRING SQL
         if ($debug) {
             $valoresDebug = "'" . implode("','", $dadosBD) . "'";
-            $this->debug("INSERT INTO `{$this->_tabela}` ({$campos}) values ({$valoresDebug})");
+            $this->debug("INSERT INTO `{$this->_table}` ({$campos}) values ({$valoresDebug})");
         }
         //TENTA INSERIR OS DADOS
         try {
             //PREPARA OS DADOS PARA INSERT USANDO PREPARED STATEMENTS
-            $ps = $this->db->prepare("INSERT INTO `{$this->_tabela}` ({$campos}) values ({$valores})");
+            $ps = $this->db->prepare("INSERT INTO `{$this->_table}` ({$campos}) values ({$valores})");
             //PASSA OS VALORES CORRETOS BASEADOS NO PARAMETROS DA STRING
             foreach ($dadosBD as $key => $value) {
                 $ps->bindValue(":$key", $value);
@@ -80,14 +80,14 @@ class Model
         $offset   = ($offset  != null ? "OFFSET {$offset}"       : "");
         $orderby  = ($orderby != null ? "ORDER BY {$orderby}" : "");
         if ($debug)
-            $this->debug("SELECT * FROM `{$this->_tabela}` {$where} {$orderby} {$limit} {$offset}");
-        $query = $this->db->prepare("SELECT * FROM `{$this->_tabela}` {$where} {$orderby} {$limit} {$offset}");
+            $this->debug("SELECT * FROM `{$this->_table}` {$where} {$orderby} {$limit} {$offset}");
+        $query = $this->db->prepare("SELECT * FROM `{$this->_table}` {$where} {$orderby} {$limit} {$offset}");
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
-     * consult direcionada a tabela atual com retorno de uma linha
+     * consult direcionada a table atual com retorno de uma linha
      *
      * @name read
      * @access public
@@ -103,8 +103,8 @@ class Model
     {
         $where    = ($where   != null ? "WHERE {$where}"      : "");
         if ($debug)
-            $this->debug("SELECT * FROM `{$this->_tabela}` {$where}");
-        $query = $this->db->prepare("SELECT * FROM `{$this->_tabela}` {$where}");
+            $this->debug("SELECT * FROM `{$this->_table}` {$where}");
+        $query = $this->db->prepare("SELECT * FROM `{$this->_table}` {$where}");
         $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
     }
@@ -114,7 +114,7 @@ class Model
      *
      * @name update
      * @access public
-     * @param (array)$dados - Array com os novos dados da tabela
+     * @param (array)$dados - Array com os novos dados da table
      * @param (boolean)$where - Condição passada para atualização
      * @version 1.0
      **/
@@ -135,11 +135,11 @@ class Model
                 $camposDebug[] = "$key = '$value'";
             }
             $camposDebug = implode(",", $camposDebug);
-            $this->debug("UPDATE `{$this->_tabela}` SET {$camposDebug} WHERE {$where}");
+            $this->debug("UPDATE `{$this->_table}` SET {$camposDebug} WHERE {$where}");
         }
         try {
             //PREPARA OS DADOS PARA INSERT USANDO PREPARED STATEMENTS
-            $ps = $this->db->prepare("UPDATE `{$this->_tabela}` SET {$campos} WHERE {$where}");
+            $ps = $this->db->prepare("UPDATE `{$this->_table}` SET {$campos} WHERE {$where}");
             //PASSA OS VALORES CORRETOS BASEADOS NO PARAMETROS DA STRING
             foreach ($dadosBD as $key => $value) {
                 $ps->bindValue(":$key", $value);
@@ -165,7 +165,7 @@ class Model
     public function delete($where)
     {
         try {
-            $ps = $this->db->prepare("DELETE FROM `{$this->_tabela}` WHERE {$where} ");
+            $ps = $this->db->prepare("DELETE FROM `{$this->_table}` WHERE {$where} ");
             $executa = $ps->execute();
         } catch (PDOexception $e) {
             echo $e->getMessage();
@@ -183,7 +183,7 @@ class Model
     private function getTableField()
     {
         $fields = array();
-        $result = $this->db->query("DESCRIBE `{$this->_tabela}`")->fetchAll();
+        $result = $this->db->query("DESCRIBE `{$this->_table}`")->fetchAll();
         foreach ($result as $r) {
             array_push($fields, $r['Field']);
         }
@@ -251,11 +251,11 @@ class Model
     }
 
     /**
-     * Busca os dados de uma tabela relacionada atravez da chave estrangeira
+     * Busca os dados de uma table relacionada atravez da chave estrangeira
      *
      * @name populateFK
      * @access public
-     * @return (array) retorna um array com os dados referente a cada tabela relacionada
+     * @return (array) retorna um array com os dados referente a cada table relacionada
      **/
     public function populateFK()
     {
