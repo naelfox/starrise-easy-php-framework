@@ -9,7 +9,6 @@ use \App\Utils\Environment;
 
 Environment::load();
 
-
 // echo getenv('DB_CONNECTION');
 // die;
 

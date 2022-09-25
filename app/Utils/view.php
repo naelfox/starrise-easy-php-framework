@@ -20,12 +20,9 @@ class View
         self::$vars = $vars;
     }
 
-
-
-
     private static function getContentView($view, $debug = false)
     {
-        $view .= '.phtml';
+        $view .= '.html';
 
         $path = __DIR__ . '/../../resources/views/' . $view;
 

@@ -81,18 +81,11 @@ class Router
             $route = preg_replace($patternVariable, '(.*?)', $route);
             $params['variables'] = $matches[1];
         }
-
-
         // pattern of validação da url
         $patternRoute = '/^' . str_replace('/', '\/', $route) . '$/';
-
         // add route into the class
-
         $this->routes[$patternRoute][$method] = $params;
     }
-
-
-
 
 
     /**
