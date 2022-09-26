@@ -6,11 +6,11 @@ require_once "../app/includes/app.php";
 use \App\Http\Router;
 
 
-$obRouter = new Router(URL);
+$objRouter = new Router(URL);
 
 //include  routes
 
 include '../app/routes/pages.php';
 
 
-$obRouter->run()->sendResponse();
+$objRouter->run()->sendResponse();

@@ -1,4 +1,4 @@
-# starrise-framework
+# StarRise Framework
 PHP MVC framework with POO
 
 ------------

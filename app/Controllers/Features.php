@@ -30,7 +30,7 @@ class Features extends Page
         if(!Environment::load()){
             return 'the .env file not found, you need to create it and set your variables in it.';
         }
-        return '.env configured';
+        return 'your .env is configured';
 
     }
 }

@@ -5,28 +5,28 @@ use App\Controllers\Home;
 use App\Controllers\About;
 use App\Controllers\Features;
 
-$obRouter->get('/', [
+$objRouter->get('/', [
     function () {
         return new Response(200, Home::getHome());
     }
 ]
 );
 
-$obRouter->get('/about', [
+$objRouter->get('/about', [
     function () {
         return new Response(200, About::getAbout());
     }
 ]
 );
 
-$obRouter->get('/features', [
+$objRouter->get('/features', [
     function () {
         return new Response(200, Features::getFeatures());
     }
 ]
 );
 
-$obRouter->get('/page/{idPage}/{action}', [
+$objRouter->get('/page/{idPage}/{action}', [
     function ($idPage, $action) {
         return new Response(200, 'Page ' . $idPage . ' - ' . $action);
     }
@@ -34,7 +34,7 @@ $obRouter->get('/page/{idPage}/{action}', [
 );
 
 //feature post
-$obRouter->post('/features', [
+$objRouter->post('/features', [
     function ($request) {
         // echo '<pre>';
         // print_r($request);

@@ -9,13 +9,12 @@ class Model
     {
         $database = array(
             'host' => 'host',
-            'login' => 'login',
-            'senha' => 'pass',
-            'banco' => 'banco de dados',
+            'user' => 'login',
+            'pass' => 'pass',
+            'database' => 'banco de dados',
         );
         extract($database);
-        // $this -> db = new PDO("mysql:host=$host;dbname=$banco", "$login", "$senha", array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'));
-        $this->db = new PDO("mysql:host=$host;dbname=$banco", "$login", "$senha", array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8MB4'));
+        $this->db = new PDO("mysql:host=$host;dbname=$database", "$user", "$pass", array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8MB4'));
         if (!$this->db) die('Erro ao conectar ao banco de dado');
     }
 
