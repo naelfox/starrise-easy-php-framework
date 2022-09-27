@@ -24,7 +24,7 @@ class Environment
         foreach ($lines as $line) {
             $cleanLine = trim($line);
             if (!empty($cleanLine)) {
-                putenv(trim($cleanLine));
+                putenv($cleanLine);
             }
         }
     }

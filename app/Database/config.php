@@ -1,22 +1,37 @@
 <?php
+namespace App\Database;
+use App\Utils\Environment;
+
+// Load environment variables
 
 class Config
 {
+    //example
 
-    # config local database
-    // public static $staging = array(
-    //     'host' => '192.168.1.18',
-    //     'login' => 'root',
-    //     'senha' => '',
-    //     'banco' => '',
-    // );
+    /**
+     * database settings 
+     * @var array
+     */
+    private $databaseSettings;
 
+    /**
+     * method that assigns environment variables in database setting
+     */
+    public function __construct()
+    {
+        Environment::load();
 
-    # production database
-    public static $production = array(
-        'host' => 'localhost',
-        'user' => 'user',
-        'pass' => 'password',
-        'database' => 'database',
-    );
+        $this->databaseSettings = array(
+            'host' => getenv('DB_HOST'),
+            'username' => getenv('DB_USERNAME'),
+            'password' => getenv('DB_PASSWORD'),
+            'database' => getenv('DB_DATABASE')
+        );
+    }
+
+    public function getSettings()
+    {
+        return $this->databaseSettings;
+    }
+
 }

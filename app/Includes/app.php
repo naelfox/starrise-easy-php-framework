@@ -1,14 +1,10 @@
 <?php
 
-use \App\Utils\View;
-use \App\Utils\Url;
-use \App\Utils\Environment;
+use App\Utils\View;
+use App\Utils\Url;
+use App\Database\Config;
 
-// Load environment variables
-Environment::load();
-
-// echo getenv('DB_CONNECTION');
-// die;
+print_r((new Config())->getSettings());
 
 
 define('URL', (new Url())->getUrl());
