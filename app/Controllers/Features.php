@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Utils\View;
+use App\Core\View;
 use App\Utils\Environment;
 
 class Features extends Page

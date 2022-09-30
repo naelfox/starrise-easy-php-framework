@@ -3,7 +3,7 @@
 
 namespace App\Controllers;
 
-use App\Utils\View;
+use App\Core\View;
 use App\Models\Book;
 
 class Home extends Page

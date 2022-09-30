@@ -3,7 +3,7 @@
 
 namespace App\Controllers;
 
-use App\Utils\View;
+use App\Core\View;
 
 class Page
 {

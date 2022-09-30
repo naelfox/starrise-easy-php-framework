@@ -1,6 +1,6 @@
 <?php
 
-use App\Utils\View;
+use App\Core\View;
 use App\Utils\Url;
 
 

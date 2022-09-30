@@ -1,9 +1,11 @@
 # StarRise Framework
 PHP MVC framework with POO
-
+click on the star to support this project :fa-star-o:
 ------------
 
 3 pillars of a good project well done are quality, performance and maintainability.
+
+Aimed at giving support to develop your projects quickly
 
 ## Template system
 The mustache symbol is {{ }} (double module symbol) which is used both to open and close the template that will apply
