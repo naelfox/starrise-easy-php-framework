@@ -17,7 +17,7 @@ class Features extends Page
         $content = View::render(
             'layouts/features',
             [
-                'envConfig' => self::checkEnvFile()
+                'envConfig' => self::checkEnvFile(),
             ]
         );
 
@@ -33,8 +33,6 @@ class Features extends Page
         return 'your .env is configured';
 
     }
-
-    
 
     
 }

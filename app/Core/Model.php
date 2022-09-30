@@ -1,6 +1,9 @@
 <?php
 
+namespace App\Core;
+
 use App\Database\Config;
+use PDO;
 
 class Model
 {
