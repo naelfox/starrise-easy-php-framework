@@ -1,6 +1,6 @@
 # StarRise Framework
 PHP MVC framework with POO
-click on the star to support this project :fa-star-o:
+> click on the star to support this project 
 ------------
 
 3 pillars of a good project well done are quality, performance and maintainability.
