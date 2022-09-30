@@ -20,7 +20,7 @@ class View
         self::$vars = $vars;
     }
 
-    private static function getContentView($view, $debug = false)
+    private static function getContentView($view, $debug = true)
     {
         $view .= '.html';
 

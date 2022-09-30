@@ -33,7 +33,7 @@ class Page
     public static function getPage($title, $content)
     {
         return View::render(
-            'layouts/page',
+            'index',
             [
                 'title' => $title,
                 'header' => self::getHeader(),
