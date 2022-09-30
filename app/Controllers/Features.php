@@ -12,7 +12,7 @@ class Features extends Page
 
     public static function getFeatures()
     {
-
+        
         // return view home
         $content = View::render(
             'layouts/features',
@@ -33,4 +33,8 @@ class Features extends Page
         return 'your .env is configured';
 
     }
+
+    
+
+    
 }
