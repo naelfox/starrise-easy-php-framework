@@ -2,13 +2,14 @@
 
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Core\View;
 use App\Utils\Environment;
 
-class Features extends Page
+class Features extends Controller
 {
 
-    // method responsible for returning home content
+
 
     public static function getFeatures()
     {

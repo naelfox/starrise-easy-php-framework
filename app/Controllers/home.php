@@ -3,10 +3,11 @@
 
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Core\View;
 use App\Models\Book;
 
-class Home extends Page
+class Home extends Controller
 {
     public static function getHome()
     {

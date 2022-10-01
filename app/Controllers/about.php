@@ -1,15 +1,14 @@
 <?php
 
-
 namespace App\Controllers;
 
+use App\Core\Controller;
 use App\Core\View;
 use App\Models\Book;
 
-class About extends Page
+class About extends Controller
 {
-
-    // method responsible for returning home content
+ 
 
     public static function getAbout()
     {
@@ -23,6 +22,8 @@ class About extends Page
         ]);
 
         // return page view
-        return self::getPage('About', $content);
+        return self::getPage('', $content);
     }
+
+    
 }

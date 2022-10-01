@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Core;
-
-
 class View
 {
     /**
@@ -20,7 +18,7 @@ class View
         self::$vars = $vars;
     }
 
-    private static function getContentView($view, $debug = true)
+    private static function getContentView($view, $debug = false)
     {
         $view .= '.html';
 

@@ -4,6 +4,7 @@ namespace App\Core;
 
 use App\Database\Config;
 use PDO;
+use PDOException;
 
 class Model
 {
@@ -55,7 +56,7 @@ class Model
             }
             //EXECUTA A QUERY
             $executa = $ps->execute();
-        } catch (PDOexception $e) {
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
         return $this->db->lastInsertId();
