@@ -33,7 +33,7 @@ class Controller
         return View::render(
             'index',
             [
-                'title' => !empty($title) ? 'ok' : 'none',
+                'title' => $title,
                 'header' => self::getHeader(),
                 'content'  => $content,
                 'footer' => self::getFooter()
