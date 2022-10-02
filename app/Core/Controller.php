@@ -10,13 +10,13 @@ class Controller
     //render the header
     private static function getHeader()
     {
-        return View::render('templates/header');
+        return View::render('modules/header');
     }
     // render the footer
     private static function getFooter()
     {
         return View::render(
-            'templates/footer',
+            'modules/footer',
             [
                 'data' => date('Y')
             ]
@@ -31,7 +31,7 @@ class Controller
     public static function getPage($title, $content)
     {
         return View::render(
-            'index',
+            'layouts/index',
             [
                 'title' => $title,
                 'header' => self::getHeader(),

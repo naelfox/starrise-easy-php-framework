@@ -36,11 +36,7 @@ $objRouter->get('/page/{idPage}/{action}', [
 //feature post
 $objRouter->post('/features', [
     function ($request) {
-        // echo '<pre>';
-        // print_r($request);
-        // echo '</pre>';
-        // die;
-        return new Response(200, Features::getFeatures());
+        return new Response(200, Features::insertFeature($request));
     }
 ]
 );

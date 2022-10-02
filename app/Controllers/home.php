@@ -14,7 +14,7 @@ class Home extends Controller
         $objBook = new Book;
 
         // return home view
-        $content = View::render('layouts/home', [
+        $content = View::render('pages/home', [
             'name' => $objBook->name,
             'description' =>  $objBook->description,
             'site' =>  $objBook->site

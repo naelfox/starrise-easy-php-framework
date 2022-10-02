@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\View;
 use App\Utils\Environment;
+use App\Models\Entities\Features as Features_Model;
 
 class Features extends Controller
 {
@@ -16,9 +17,10 @@ class Features extends Controller
         
         // return view home
         $content = View::render(
-            'layouts/features',
+            'pages/features',
             [
                 'envConfig' => self::checkEnvFile(),
+                'item' => self::getFeaturesItens()
             ]
         );
 
@@ -33,6 +35,28 @@ class Features extends Controller
         }
         return 'your .env is configured';
 
+    }
+
+    public static function insertFeature($request){
+        $postVars = $request->getPostVars();
+        $objFeature = new Features_Model;
+        $objFeature->name = $postVars['name'];
+        $objFeature->message = $postVars['message'];
+        $objFeature->send();
+        return self::getFeatures();
+    }
+
+    /**
+     * Return itens
+     *
+     * @return string
+     */
+    public static function getFeaturesItens(){
+        $itens = '';
+
+        $results = Features_Model::getFeatures();
+       
+        return $itens;
     }
 
     
