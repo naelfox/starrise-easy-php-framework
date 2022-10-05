@@ -13,3 +13,4 @@ The mustache symbol is {{ }} (double module symbol) which is used both to open a
 create an .env file and insert your database data into it. You can follow the template from .env.example.
 In your .env you can create any variable that contains passwords or sensitive data that need to be kept safe.
 
+if you don't need to configure the database in your project, you can use the `Book` class, which saves data without needing to insist.
