@@ -9,8 +9,8 @@ use \App\Http\Router;
 $objRouter = new Router(URL);
 
 //include  routes
+require_once '../app/routes/pages.php';
 
-include '../app/routes/pages.php';
 
 
 $objRouter->run()->sendResponse();

@@ -31,8 +31,8 @@ class Features{
     }
 
     public static function getFeatures(){
-         $db = new Model();
-         $db->consult('SELECT * FROM features');
+            $db = new Model();
+            $db->consult('SELECT * FROM features');
     }
 
 }
