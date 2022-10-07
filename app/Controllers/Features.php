@@ -52,11 +52,12 @@ class Features extends Controller
      * @return string
      */
     private static function getFeaturesItens(){
-        $itens = '';
 
-        $results = Features_Model::getFeatures();
+
+        $objFeature = new Features();
+        $results = $objFeature->getFeatures();
        
-        return $itens;
+        return $results;
     }
 
     

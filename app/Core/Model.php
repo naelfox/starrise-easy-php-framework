@@ -25,7 +25,7 @@ class Model
      *
      * @name insert
      * @access public
-     * @param (array)$dados - Array com os dados para inserir na table
+     * @param (array)$dados - Array with the data to insert into the table
      * @param (boolean)$where - Condição passada para atualização
      * @return (int) retorna a id da linha inserida;
      * @version 1.0

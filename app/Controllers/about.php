@@ -8,7 +8,6 @@ use App\Models\Book;
 
 class About extends Controller
 {
- 
 
     public static function getAbout()
     {
