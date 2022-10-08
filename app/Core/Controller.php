@@ -31,7 +31,7 @@ class Controller
     public static function getPage($title, $content)
     {
         return View::render(
-            'layouts/index',
+            'layouts/base',
             [
                 'title' => $title,
                 'header' => self::getHeader(),

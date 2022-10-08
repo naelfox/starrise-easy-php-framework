@@ -14,12 +14,11 @@ class Features extends Controller
 
     public static function getFeatures()
     {
-        
+
         // return view home
         $content = View::render(
             'pages/features',
             [
-                'envConfig' => self::checkEnvFile(),
                 'item' => self::getFeaturesItens()
             ]
         );
@@ -28,16 +27,17 @@ class Features extends Controller
         return self::getPage('Features', $content);
     }
 
-    public static function checkEnvFile(){
+    public static function checkEnvFile()
+    {
 
-        if(!Environment::load()){
+        if (!Environment::load()) {
             return 'the .env file not found, you need to create it and set your variables in it.';
         }
         return 'your .env is configured';
-
     }
 
-    public static function insertFeature($request){
+    public static function insertFeature($request)
+    {
         $postVars = $request->getPostVars();
         $objFeature = new Features_Model;
         $objFeature->name = $postVars['name'];
@@ -51,14 +51,11 @@ class Features extends Controller
      *
      * @return string
      */
-    private static function getFeaturesItens(){
-
-
+    private static function getFeaturesItens()
+    {
         $objFeature = new Features();
         $results = $objFeature->getFeatures();
-       
+
         return $results;
     }
-
-    
 }
