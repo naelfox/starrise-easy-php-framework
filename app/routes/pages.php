@@ -4,6 +4,7 @@ use App\Http\Response;
 use App\Controllers\Home;
 use App\Controllers\About;
 use App\Controllers\Features;
+use App\Controllers\Database as DatabaseView;
 
 $objRouter->get('/', [
     function () {
@@ -19,9 +20,9 @@ $objRouter->get('/about', [
 ]
 );
 
-$objRouter->get('/features', [
+$objRouter->get('/database', [
     function () {
-        return new Response(200, Features::getFeatures());
+        return new Response(200, DatabaseView::getDataBaseView());
     }
 ]
 );
