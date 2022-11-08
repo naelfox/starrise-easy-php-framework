@@ -18,18 +18,16 @@ class Url
    {
       if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
          return "https";
-      } else {
-         return "http";
       }
+      return "http";
    }
 
    private function getDomain()
    {
-      if($_SERVER['SERVER_NAME'] == 'localhost'){
+      if ($_SERVER['SERVER_NAME'] == 'localhost') {
          return $_SERVER['HTTP_HOST'];
-      }else{
-         return $_SERVER['SERVER_NAME'];
       }
+      return $_SERVER['SERVER_NAME'];
    }
 
    private function mount()
