@@ -26,8 +26,8 @@ class Model
      * @name insert
      * @access public
      * @param (array)$dados - Array with the data to insert into the table
-     * @param (boolean)$where - Condição passada para atualização
-     * @return (int) retorna a id da linha inserida;
+     * @param (boolean)$where -Past condition for update
+     * @return (int) returns an id with the inserted row
      * @version 1.0
      **/
     public function insert(array $dados, $debug = FALSE)
@@ -38,24 +38,24 @@ class Model
                 $dadosBD[$ind] = $val;
             }
         }
-        //INSERT DINAMICO BASEADO EM ARRAY DE DADOS
-        $campos      =  implode(",", array_keys($dadosBD));
+        // DYNAMIC INSERT BASED ON DATA ARRAY
+        $fields      =  implode(",", array_keys($dadosBD));
         $valores  =  ":" . implode(",:", array_keys($dadosBD));
-        //FAZ O DEBUG DA STRING SQL
+        // DEBUG THE SQL STRING
         if ($debug) {
             $valoresDebug = "'" . implode("','", $dadosBD) . "'";
-            $this->debug("INSERT INTO `{$this->_table}` ({$campos}) values ({$valoresDebug})");
+            $this->debug("INSERT INTO `{$this->_table}` ({$fields}) values ({$valoresDebug})");
         }
-        //TENTA INSERIR OS DADOS
+        //TRY TO INSERT THE DATA
         try {
-            //PREPARA OS DADOS PARA INSERT USANDO PREPARED STATEMENTS
-            $ps = $this->db->prepare("INSERT INTO `{$this->_table}` ({$campos}) values ({$valores})");
-            //PASSA OS VALORES CORRETOS BASEADOS NO PARAMETROS DA STRING
+            // PREPARE THE DATA FOR INSERT USING PREPARED STATEMENTS
+            $statement = $this->db->prepare("INSERT INTO `{$this->_table}` ({$fields}) values ({$valores})");
+            //PASS THE CORRECT VALUES BASED ON THE STRING PARAMETERS
             foreach ($dadosBD as $key => $value) {
-                $ps->bindValue(":$key", $value);
+                $statement->bindValue(":$key", $value);
             }
-            //EXECUTA A QUERY
-            $executa = $ps->execute();
+            // EXECUTE THE QUERY
+            $executa = $statement->execute();
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
@@ -67,11 +67,11 @@ class Model
      *
      * @name read
      * @access public
-     * @param (string)$where   - Passa condições se for necessário
-     * @param (string)$limit   - define o limit da pesquisa
-     * @param (string)$offset  - define o offset da pesquisa
-     * @param (string)$orderby - define a ordem para o resultado
-     * @param (boolean)$debug  - imprime a string do sql
+     * @param (string)$where - Pass conditions if necessary
+     * @param (string)$limit - sets the search limit
+     * @param (string)$offset - sets the search offset
+     * @param (string)$orderby - sets the order for the result
+     * @param (boolean)$debug - prints the sql string
      * @version 1.0
      **/
     public function read($where = null, $limit = null, $offset = null, $orderby = null, $debug = FALSE)
@@ -88,15 +88,15 @@ class Model
     }
 
     /**
-     * consult direcionada a table atual com retorno de uma linha
+     * query directed to current table with return of one line
      *
      * @name read
      * @access public
-     * @param (string)$where   - Passa condições se for necessário
-     * @param (string)$limit   - define o limit da pesquisa
-     * @param (string)$offset  - define o offset da pesquisa
-     * @param (string)$orderby - define a ordem para o resultado
-     * @param (boolean)$debug  - imprime a string do sql
+     * @param (string)$where - Pass conditions if needed
+     * @param (string)$limit - sets the search limit
+     * @param (string)$offset - sets the search offset
+     * @param (string)$orderby - sets the order for the result
+     * @param (boolean)$debug - prints the sql string
      * @version 1.0
      **/
 
@@ -115,8 +115,8 @@ class Model
      *
      * @name update
      * @access public
-     * @param (array)$dados - Array com os novos dados da table
-     * @param (boolean)$where - Condição passada para atualização
+     * @param (array)$data - Array with the new table data
+     * @param (boolean)$where - Condition passed to update
      * @version 1.0
      **/
 
@@ -130,7 +130,7 @@ class Model
             }
         }
         $campos = implode(",", $campos);
-        //FAZ O DEBUG DA STRING SQL
+        // DEBUG THE SQL STRING
         if ($debug) {
             foreach ($dadosBD as $key => $value) {
                 $camposDebug[] = "$key = '$value'";
@@ -139,13 +139,13 @@ class Model
             $this->debug("UPDATE `{$this->_table}` SET {$camposDebug} WHERE {$where}");
         }
         try {
-            //PREPARA OS DADOS PARA INSERT USANDO PREPARED STATEMENTS
+            // PREPARE THE DATA FOR INSERT USING PREPARED STATEMENTS
             $ps = $this->db->prepare("UPDATE `{$this->_table}` SET {$campos} WHERE {$where}");
-            //PASSA OS VALORES CORRETOS BASEADOS NO PARAMETROS DA STRING
+            //PASS THE CORRECT VALUES BASED ON THE STRING PARAMETERS
             foreach ($dadosBD as $key => $value) {
                 $ps->bindValue(":$key", $value);
             }
-            //EXECUTA A QUERY
+            // EXECUTE THE QUERY
             $executa = $ps->execute();
         } catch (PDOexception $e) {
             echo $e->getMessage();
@@ -154,15 +154,13 @@ class Model
     }
 
     /**
-     * Inserir dados no banco
-     *
+     * Insert data into the database
      * @name delete
      * @access public
-     * @param (boolean)$where - Condição passada para exclusão
-     * @return (int) retorna a quantidade de linhas afetadas;
+     * @param (boolean)$where - Condition passed for deletion
+     * @return (int) returns the number of rows affected;
      * @version 1.0
      **/
-
     public function delete($where)
     {
         try {
@@ -193,11 +191,10 @@ class Model
 
     /**
      * Returns a custom SQL query
-     *
      * @name consult
      * @access public
-     * @param (string)$sql - Comando SQL a ser executado
-     * @param (boolean)$debug - Se deve debugar o comando. Por padrão é FALSE
+     * @param (string)$sql - SQL command to execute
+     * @param (boolean)$debug - Whether to debug the command. By default it is FALSE
      * @version 1.0
      **/
     public function consult($sql, $debug = FALSE)
@@ -210,11 +207,10 @@ class Model
      * consult one line
      * returns the first row of the query
      *
-     * @name oneLineConsult
      * @access public
-     * @param (string)$sql - Comando SQL a ser executado
-     * @param (boolean)$debug - Se deve debugar o comando. Por padrão é FALSE
-     * @return (array)$resultado - Array com os resultados da primeira linha da consult SQL
+     * @param (string)$sql - SQL command to execute
+     * @param (boolean)$debug - Whether to debug the command. By default it is FALSE
+     * @return (array)$result - Array with the results of the first line of the SQL query
      * @version 11.1.11
      **/
     public function oneLineConsult($sql, $debug = FALSE)
@@ -226,37 +222,31 @@ class Model
     }
 
     /**
-     * consult um único valor
-     * Este método retorna a primeira coluna da primeira linha do resultado de uma consult
-     *
+     * query a single value
+     * This method returns the first column of the first row of a query result
      * @name consultValue
      * @access public
-     * @param (string)$sql - Comando SQL a ser executado
-     * @param (boolean)$debug - Se deve debugar o comando. Por padrão é FALSE
-     * @return (?) Valor da primeira coluna da primeira linha do resultado da consult
+     * @param (string)$sql - SQL command to execute
+     * @param (boolean)$debug - Whether to debug the command. By default it is FALSE
+     * @return (?) Value of the first column of the first row of the query result
      * @version 11.1.11
      **/
 
     public function consultValue($sql, $debug = FALSE)
     {
-        // consultndo
         $resultado = $this->oneLineConsult($sql, $debug);
-        // Se retornou um Array
         if (is_array($resultado)) {
-            // Retornando a primeira coluna
             return array_shift($resultado);
         } else {
-            // Retornando falso
             return FALSE;
         }
     }
 
     /**
-     * Busca os dados de uma table relacionada atravez da chave estrangeira
-     *
+     * Fetch data from a related table via foreign key
      * @name populateFK
      * @access public
-     * @return (array) retorna um array com os dados referente a cada table relacionada
+     * @return (array) returns an array of data for each related table
      **/
     public function populateFK()
     {
@@ -268,11 +258,10 @@ class Model
     }
 
     /**
-     * Método privado de debug dos comandos SQL
-     *
+     * Private debug method of SQL commands
      * @name debug
      * @access private
-     * @param (string)$sql - Comando SQL a ser debugado
+     * @param (string)$sql - SQL command to be debugged
      * @return void
      * @version 1
      **/
