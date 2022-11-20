@@ -1,18 +1,19 @@
 <?php
+
 namespace App\Database;
+
 use App\Utils\Environment;
 
 // Load environment variables
 
 class Config
 {
-    //example
 
     /**
      * database settings 
      * @var array
      */
-    private $databaseSettings;
+    private static $databaseSettings;
 
     /**
      * method that assigns environment variables in database setting
@@ -21,17 +22,16 @@ class Config
     {
         Environment::load();
 
-        $this->databaseSettings = array(
+        self::$databaseSettings = [
             'host' => getenv('DB_HOST'),
             'username' => getenv('DB_USERNAME'),
             'password' => getenv('DB_PASSWORD'),
             'database' => getenv('DB_DATABASE')
-        );
+        ];
     }
 
-    public function getSettings()
+    public static function getSettings()
     {
-        return $this->databaseSettings;
+        return self::$databaseSettings;
     }
-
 }

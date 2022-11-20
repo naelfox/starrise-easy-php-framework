@@ -14,7 +14,7 @@ class Model
 
     public function __construct()
     {
-        $db = (new Config())->getSettings();
+        $db = Config::getSettings();
         extract($db);
         $this->db = new PDO("mysql:host=$host;dbname=$database", "$username", "$password", array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8MB4'));
         if (!$this->db) die('Error connecting to database');
