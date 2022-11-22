@@ -4,14 +4,14 @@ namespace App\Utils;
 
 class Url
 {
-   private $protocol;
-   private $domain;
+   private static $protocol;
+   private static $domain;
 
 
    public function __construct()
    {
-      $this->protocol = $this->getProtocol();
-      $this->domain = $this->getDomain();
+      self::$protocol = $this->getProtocol();
+      self::$domain = $this->getDomain();
    }
 
    private function getProtocol()
@@ -30,13 +30,13 @@ class Url
       return $_SERVER['SERVER_NAME'];
    }
 
-   private function mount()
+   private static function mount()
    {
-      return $this->protocol . '://' . $this->domain;
+      return self::$protocol . '://' . self::$domain;
    }
 
-   public function getUrl()
+   public static function getUrl()
    {
-      return $this->mount();
+      return self::mount();
    }
 }
