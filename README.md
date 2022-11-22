@@ -15,7 +15,7 @@ In your .env you can create any variable that contains passwords or sensitive da
 
 if you don't need to configure the database in your project, you can use the `Book` class, which saves data without needing to insist.
 
-## File system
+## Organization of files
 `APP` -> all backend features.
 `Resources` -> all front end html, js and css features.
 
