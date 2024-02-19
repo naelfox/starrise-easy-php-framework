@@ -2,91 +2,54 @@
 
 namespace App\Http;
 
+use InvalidArgumentException;
+
 class Response
 {
-    /**
-     *Code Status Http
-     *@var integer
-     */
-    private $httpCode = 200;
+
+
+
+    const HttpStatusCodes = [
+        200 => 'OK',
+        201 => 'Created',
+        204 => 'No Content',
+        400 => 'Bad Request',
+        401 => 'Unauthorized',
+        403 => 'Forbidden',
+        404 => 'Not Found',
+        405 => 'Method Not Allowed',
+        500 => 'Internal Server Error'
+    ];
+
 
     /**
-     * Response Header
-     * @var array
+     * The sendHttpCode function is used to set the HTTP status code in the response and optionally display a corresponding status message.
+     * @param int $status (default: 200) - an integer that represents the HTTP status code to be sent in the response.
+     * @param bool $displayMessage (default: false) - a boolean that determines whether the HTTP status message should be displayed in the response or not.
+     * @return void - the function doesn't return anything, but sends the corresponding HTTP header to the response and possibly displays the corresponding status message.
      */
-    private $headers = [];
 
-    /**
-     * Type content return
-     * @var string
-     */
-    private $contentType = 'text/html';
-
-    /**
-     * Response content
-     * @var mixed
-     */
-    private $content;
-
-    /**
-     * Method will be start the class and define values
-     * @param integer $httpCode
-     * @param mixed $content
-     * @param string $contentType
-     */
-    public function __construct($httpCode, $content, $contentType = 'text/html')
+    public static function sendHttpCode($status = 200, $displayMessage = false)
     {
-        $this->httpCode = $httpCode;
-        $this->content  = $content;
-        $this->setContentType($contentType);
-    }
-    /**
-     * Methods that will be change content type of response
-     * @param string $contentType
-     */
 
-    public function setContentType($contentType)
-    {
-        $this->contentType = $contentType;
-        $this->addHeader('Content-Type', $contentType);
-    }
-
-    /**
-     * Método that will add a new resgister to header response
-     * @param string $key
-     * @param string $value
-     */
-
-    public function addHeader($key, $value)
-    {
-        $this->headers[$key] = $value;
-    }
-
-    /**
-     * Methods will be send headers to browser
-     */
-
-    private function sendHeaders()
-    {
-        //Status
-        http_response_code($this->httpCode);
-
-        //Send Header
-        foreach ($this->headers as $key => $value) {
-            header($key . ': ' . $value);
+        if (!array_key_exists($status, self::HttpStatusCodes)) {
+            throw new InvalidArgumentException('Invalid HTTP status code.');
         }
+
+        http_response_code($status);
+        echo ($displayMessage) ? $status . " " . self::HttpStatusCodes[$status] : '';
     }
 
-    /**
-     * Methods that will be send response to user
-     */
-    public function sendResponse()
+    public static function addHeaders($httpHeaders = [])
     {
-        $this->sendHeaders();
-        switch ($this->contentType) {
-            case 'text/html':
-                echo $this->content;
-                exit;
+        if (count($httpHeaders)) {
+            foreach ($httpHeaders as $httpHeader) {
+                header($httpHeader);
+            }
+            return;
         }
+        return false;
     }
+
+
 }

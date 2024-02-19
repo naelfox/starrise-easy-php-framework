@@ -1,4 +1,5 @@
-readmelegend.md
-phpShowErros.md
-.env
 .vscode
+vendor
+tests
+.phpunit.result.cache
+assets/img/*

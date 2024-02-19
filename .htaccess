@@ -1,0 +1,39 @@
+# ##### LOCAWEB - NAO REMOVER #####
+# AddHandler php80-script .php
+# suPHP_ConfigPath /home/cartasparajuliet1/
+# ##### LOCAWEB - NAO REMOVER #####
+
+# php_flag display_errors on
+
+# # php_value display_errors Off
+
+Options -Indexes
+
+RewriteEngine On
+
+# Redirecionar todas as solicitações para o arquivo index.php, exceto arquivos reais
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php/$1 [L]
+
+# Remover index.php da URL, se estiver presente
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s(.*)/index\.php/ [NC]
+RewriteRule ^ %1/ [R=301,L]
+
+RewriteCond %{QUERY_STRING} (^|&)i=1(&|$)
+RewriteRule ^ %{REQUEST_URI}? [R=301,L]
+
+# # Redirecionar para HTTPS, se não estiver usando HTTPS
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Remover a extensão .php das URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
+
+# # # Configuração da versão do php
+# # AddHandler php80-script .php
+# #     suPHP_ConfigPath /home/cartasparajuliet1/
+
+# # Redirect 301 / http://cartasparajulietatarot.com.br/
